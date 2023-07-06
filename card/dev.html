@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dev.css" />
+    <title>Load</title>
+</head>
+
+<body>
+    <div id="bg"></div>
+    <div id="back" onclick="back()">back</div>
+    <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io()
+        var mynum = 0;
+
+        function back(){
+            location.href = "/room";
+        }
+
+
+        entries = window.performance.getEntriesByType("navigation");
+        if (entries[0].type === 'reload') {
+            socket.emit("leave");
+        }
+
+        window.onload = function () {
+            socket.emit("join1");//オンラインになった通知をする
+        }
+
+        socket.on("joined1", (num) => { //オンライン通知を送ることができた_自分が何番目か
+            mynum = num;//自分が何番目か保存
+            alert(mynum)
+            Cookies.set('mynum', mynum);
+        })
+
+        socket.on("matchFound1", () => {
+            // if (mynum == 1 || mynum == 2) {
+            //     location.href = "page1.html";
+            // } else {
+            //     alert("ルームが満員なので選択画面に戻ります");
+            //     location.href = "room.html";
+            // }
+            alert("MatchFound1")
+            location.href = "/game";
+        })
+
+        socket.on("full1", () => {
+            alert("full")
+            location.href = "/room";
+        })
+    </script>
+</body>
+
+</html>

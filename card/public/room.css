@@ -1,0 +1,102 @@
+@font-face {/*フォントのインポート*/
+	font-family: PixelMplus10 Regular;
+	src: url('https://cdn.leafscape.be/PixelMplus/PixelMplus10-Regular_web.woff2')
+	     format("woff2");
+}
+
+/*全体画面*/
+body{
+    font-family: PixelMplus10 Regular;
+    background-color:  #394867;
+	margin: 0;
+}
+
+#bg{
+	background-image: url("/img/IMG_0061.GIF");
+	background-size: cover;
+	width: 100%;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+}
+
+h1{
+	position: absolute;
+	top: 5px;
+}
+
+/*アウトライン*/
+.radius{
+	border-radius: 25px;
+}
+
+/*ボタン全体*/
+#position{
+position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100vh;
+}
+
+/*divに触れたとき*/
+.room1:hover{
+	background-color: #000000;
+	color: #ffffff;
+	transition: 0.25s;
+	transform: translate(0px,-20px);
+
+}
+.room2:hover{
+	background-color: #000000;
+	color: #ffffff;
+	transition: 0.25s;
+	transform: translate(0px,-20px);
+}
+.room3:hover{
+	background-color: #000000;
+	color: #ffffff;
+	transition: 0.25s;
+	transform: translate(0px,-20px);
+	
+}
+/*ルームの要素*/
+.room1{
+	background-color: #ffffff70;
+	border: 10px solid black;
+	font-size: 70px;
+	margin: 100px;
+	width: 400px;
+	height: 100px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.room2{
+	background-color: #ffffff70;
+	border: 10px solid black;
+	font-size: 70px;
+	margin: 100px;
+	width: 400px;
+	height: 100px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.room3{
+	background-color: #ffffff70;
+	border: 10px solid black;
+	font-size: 70px;
+	margin: 100px;
+	width: 400px;
+	height: 100px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.3s;
+}

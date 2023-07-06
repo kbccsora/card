@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="room.css">
+    <title>KBCCルーム画面</title>
+</head>
+
+<body>
+    <div id="bg"></div>
+    <h1>ルーム画面</h1>
+    <div id="position">
+    <div class="room1 radius outline" onclick="room1()">ROOMⅠ</div>
+    <div class="room2 radius outline" onclick="room2()">ROOMⅡ</div>
+    <div class="room3 radius outline" onclick="room3()">ROOMⅢ</div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script>
+        
+        var key = Cookies.get("user");
+
+        if(key == undefined){
+            alert("不正なアクセスです")
+        }
+
+        function room1(){
+            location.href = "/room/dev";
+        }
+
+    </script>
+</body>
+
+</html>

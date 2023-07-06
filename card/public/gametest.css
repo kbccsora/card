@@ -1,0 +1,74 @@
+@font-face {
+    /*フォントのインポート*/
+    font-family: PixelMplus10 Regular;
+    src: url('https://cdn.leafscape.be/PixelMplus/PixelMplus10-Regular_web.woff2') format("woff2");
+}
+
+.card {
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: burlywood;
+    width: 160px;
+    height: 223px;
+}
+
+/* .card:hover{
+    position: relative;
+    top: -15px;
+} */
+
+.cardimg {
+    width: 160px;
+    height: 223px;
+}
+
+
+
+#hand {
+    position: absolute;
+    display: flex;
+    bottom: 20px;
+    justify-content: center
+}
+
+.field {
+    width: 160px;
+    height: 222px;
+    background-color: black;
+    margin: 0;
+    z-index: -1;
+}
+
+#cardfield {
+    display: flex;
+}
+
+#myfield {
+    position: relative;
+    left: 350px;
+}
+
+#enemyfield {
+    position: relative;
+    left: 650px;
+}
+
+.text-output {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    color: currentColor;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid currentColor;
+    font-family: PixelMplus10 Regular;
+}
+
+.effect{
+    position: relative;
+    top: -250px;
+}
+
+.effect img{
+    width: 170px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="test.css" rel="stylesheet">
+    <title>テストページ</title>
+</head>
+
+<body>
+    テスト
+    <button onclick="test()">ドロー</button>
+    <button onclick="first()">first</button>
+
+    <div id="base"></div>
+
+    <div id="aria">
+        <div id="card1" class="cards">
+        </div>
+
+        <div id="card2" class="cards">
+        </div>
+
+        <div id="card3" class="cards">
+        </div>
+
+        <div id="card4" class="cards">
+        </div>
+
+        <div id="card5" class="cards">
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/anime.min.js"></script>
+    <script src="test.js"></script>
+</body>
+
+</html>

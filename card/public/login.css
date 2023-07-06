@@ -1,0 +1,123 @@
+@font-face {
+  /*フォントのインポート*/
+  font-family: PixelMplus10 Regular;
+  src: url('https://cdn.leafscape.be/PixelMplus/PixelMplus10-Regular_web.woff2') format("woff2");
+}
+
+body {
+  font-family: PixelMplus10 Regular;
+  background-color: #394867;
+}
+
+#LoginForm {
+  display: block;
+  animation: fade-in 1s;
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+#RegisterForm {
+  display: none;
+  animation: fade-in .4s;
+}
+
+form {
+  width: 400px;
+  padding: 40px 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff70;
+  text-align: center;
+  border-radius: 30px;
+}
+
+form h1,
+form p {
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+}
+
+form p {
+  font-size: 10px;
+}
+
+form input[type="id"],
+form input[type="password"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  padding: 15px 10px;
+  width: 200px;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+  text-align: center;
+  font-family: PixelMplus10 Regular;
+}
+
+form input[type="id"]:focus,
+form input[type="password"]:focus {
+  width: 280px;
+  background-color: #f0f8ff;
+}
+
+.reglog {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  border: 2px solid rgb(113, 55, 55);
+  padding: 15px 10px;
+  width: 200px;
+  outline: none;
+  color: rgb(113, 55, 55);
+  border-radius: 25px;
+  transition: 0.25s;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.reglog:hover {
+  background-color: #000000;
+  border: 2px solid #000000;
+  color: #ffffff;
+}
+
+#selecter {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: 400px;
+  text-align: center;
+  margin: auto;
+  cursor: pointer;
+}
+
+.selecter {
+  width: 100px;
+  margin-left: 50px;
+  margin-right: 50px;
+  transition: 0.3s;
+}
+
+.selecter:hover {
+  color: rgb(113, 55, 55);
+  transform: translate(0, 5px);
+  transition: 0.3s;
+}

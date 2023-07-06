@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="login.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form name="login_form" id="LoginForm"><!-- ログインフォーム -->
+        <div class="login_form_top">
+            <h1>LOGIN</h1>
+            <p>UserID、Passwordをご入力の上、「LOGIN」ボタンをクリックしてください。</p>
+            <input type="id" id="user_id" placeholder="UserID" autocomplete="off" required="required">
+            <input type="password" id="password" placeholder="Password" required="required">
+            <div id="logbutton" class="reglog" onclick="Login()">LOGIN</div>
+        </div>
+        <div id="selecter">
+            <div id="selecterlog" class="selecter">LOGIN</div>
+            <div id="selecterreg" class="selecter" onclick="ChangeRegister()">REGISTER</div>
+        </div>
+    </form>
+
+
+    <form name="register_form" id="RegisterForm"><!-- 登録フォーム -->
+        <div class="register_form_top">
+            <h1>REGISTER</h1>
+            <p>UserID、Passwordをご入力の上、「REGISTER」ボタンをクリックしてください。</p>
+            <input type="id" id="Register_id" placeholder="UserID" autocomplete="off" required="required">
+            <input type="password" id="RegisterPass1" placeholder="Password" required="required">
+            <input type="password" id="RegisterPass2" placeholder="Confirm Password" required="required">
+            <div id="regbutton" class="reglog" onclick="Register()">REGISTER</div>
+        </div>
+        <div id="selecter">
+            <div id="selecterlog" class="selecter" onclick="ChangeLogin()">LOGIN</div>
+            <div id="selecterreg" class="selecter">REGISTER</div>
+        </div>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/register.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script>
+
+        var socket = io()
+        var LoginForm = document.getElementById("LoginForm");
+        var RegisterForm = document.getElementById("RegisterForm");
+        var idform = document.getElementById("user_id");
+        var passform = document.getElementById("password");
+        var Register_id = document.getElementById("Register_id");
+        var RegisterPass1 = document.getElementById("RegisterPass1");
+        var RegisterPass2 = document.getElementById("RegisterPass2");
+
+        function ChangeRegister() {//フォームの切り替え
+            LoginForm.style.display = "none";
+            RegisterForm.style.display = "block";
+        }
+        function ChangeLogin() {//フォームの切り替え
+            RegisterForm.style.display = "none";
+            LoginForm.style.display = "block";
+        }
+
+        socket.on("authenticated", () =>{
+            location.href = "/room";
+        })
+
+        socket.on("unauthenticated", () =>{
+            alert("UserIDまたはPasswordが間違っています");
+        })
+    </script>
+</body>
+
+</html>

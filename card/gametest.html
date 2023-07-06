@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/gametest.css" />
+    <title>gametest</title>
+</head>
+
+<body>
+    <div id="myhp">
+        <input class="text-output" value="30">
+    </div>
+    <div id="enemyhp">
+        <input class="text-output" value="30">
+    </div>
+    <button onclick="turnend()">turnend</button>
+    <div id="hand">
+        <div id="1" class="card"><img id="card1" class="cardimg" src="/img/1.png" onclick="move(this.id)"></div>
+        <div id="2" class="card"><img id="card2" class="cardimg" src="/img/2.png" onclick="move(this.id)"></div>
+        <div id="3" class="card"><img id="card3" class="cardimg" src="/img/3.png" onclick="move(this.id)"></div>
+        <div id="4" class="card"><img id="card4" class="cardimg" src="/img/4.png" onclick="move(this.id)"></div>
+        <div id="5" class="card"><img id="card5" class="cardimg" src="/img/5.png" onclick="move(this.id)"></div>
+    </div>
+
+    <div id="cardfield">
+        <div class="field" id="myfield">
+            <img src="/img/toumei.png" id="mycard" class="cardimg">
+            <div id="myeffect" class="effect">
+            </div>
+        </div>
+        <div class="field" id="enemyfield">
+            <img src="/img/toumei.png" id="enemycard" class="cardimg">
+            <div id="effect" class="effect">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/game.js"></script>
+    <script src="js/anime.min.js"></script>
+    <script>
+        var socket = io()
+        var myhp = 30;
+        var hand1 = document.getElementById("1")
+        var hand2 = document.getElementById("2")
+        var hand3 = document.getElementById("3")
+        var hand4 = document.getElementById("4")
+        var hand5 = document.getElementById("5")
+        var card1 = document.getElementById("card1")
+        var card2 = document.getElementById("card2")
+        var card3 = document.getElementById("card3")
+        var card4 = document.getElementById("card4")
+        var card5 = document.getElementById("card5")
+        var field = document.getElementById("myfield")
+        var enemyfield = document.getElementById("enemycard")
+        var btn = document.getElementById('butn');
+        var wrapper = document.getElementById('effect');
+        var turn = 0;
+        var flg = 0;
+        var counter = 0;
+        var clntcard = "";
+        var atk = 0;
+        var mynum = Cookies.get("mynum");
+        var mycard = ["1", "2", "3", "4", "5"];
+
+        window.onload = function () {
+            for (let i = 0; i < mycard.length; i++) {
+                mycard[i] = Math.floor(Math.random() * (15 - 1)) + 1;
+            }
+            socket.emit("init1")
+            card1.src = "/img/" + mycard[0] + ".png";
+            card2.src = "/img/" + mycard[1] + ".png";
+            card3.src = "/img/" + mycard[2] + ".png";
+            card4.src = "/img/" + mycard[3] + ".png";
+            card5.src = "/img/" + mycard[4] + ".png";
+        }
+
+        socket.on("initturn1", (room1turn) => {//turnの初期化
+            turn = room1turn;
+        })
+
+        socket.on("changeturn", (room1turn) => {
+            turn = room1turn;
+        })
+
+        socket.on("cardinfo", (num, ap, dp, type) => {
+            document.getElementById("enemycard").src = "/img/" + num + ".png";
+            atk = ap;
+            if (type == "heal") {
+                alert(dp)
+            }
+            alert("カウンター" + turn)
+            if (turn == 1) {
+                counter = 2;
+            } else {
+                counter = 1;
+            }
+        })
+
+        socket.on("counterinfo", (num, ap, dp, type) => {
+            if (counter == mynum) {
+                atk = atk - dp;
+                removehp(atk);
+                slash("myeffect");
+            } else {
+                document.getElementById("enemycard").src = "/img/" + num + ".png";
+                slash("effect");
+            }
+            counter = 0;
+            socket.emit("emithp", myhp)
+        })
+
+        socket.on("nocounterinfo", () => {
+            if (counter == mynum) {
+                removehp(atk);
+                slash("myeffect");
+            } else {
+                slash("effect");
+            }
+            counter = 0;
+            socket.emit("emithp", myhp)
+        })
+
+        socket.on("heal", (hp) => {
+            addhp(hp);
+            socket.emit("emithp", myhp)
+        })
+
+        socket.on("enemyhp", (hp) => {
+            anime({
+                targets: '#enemyhp input',
+                value: hp,
+                round: 1,
+                duration: 1500,
+                easing: "easeOutSine",
+            });
+        })
+
+        function addhp(hp) {
+            anime({
+                targets: '#myhp input',
+                value: myhp += hp,
+                round: 1,
+                duration: 1500,
+                easing: "easeOutSine",
+            });
+        }
+
+        function removehp(ap) {
+            anime({
+                targets: '#myhp input',
+                value: myhp -= ap,
+                round: 1,
+                duration: 1500,
+                easing: "easeOutSine",
+            });
+        }
+
+    </script>
+</body>
+
+</html>
